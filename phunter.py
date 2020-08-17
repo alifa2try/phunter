@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# This program crawls websites
+# This program crawls websites and fetch phone number in Nigeria format
 
 
 # import modules
@@ -10,6 +10,7 @@ import urllib.parse
 import argparse
 from colorama import Fore, init, Style
 import xlsxwriter
+import sys
 
 init()
 
@@ -106,9 +107,13 @@ def crawl(url):
 					
 					for phone in phones:
 
+						if not '+234' in phone and not '234' in phone:
+							phone = '+234' + phone
+
 						if phone not in phone_list:
 							phone_list.append(phone)
-							print(f"{White}[+] Found a number: {phone}{Reset}")	
+							print(f"{Green}[+] Found a number: {phone}{Reset}")	
+							numverify(phone)
 							global phones_counter
 							phones_counter += 1
 					crawl(link)	
@@ -154,6 +159,33 @@ def export_results(phones):
 		print(f"{Red}[-]Error in export_results {e}{Reset}")
 
 
+def numverify(number):
+	
+	access_key = ''
+	url = 'http://apilayer.net/api/validate?access_key=' + access_key + '&number=' + number
+	response = requests.get(url)
+
+	answer = response.json()
+
+	try:
+		if answer["valid"] == True:
+		    #print(answer)
+		    print(f"Number: {answer['number']}")
+		    print("International format:",answer["international_format"])
+		    print("Country prefix:",answer["country_prefix"])
+		    print("Country name:",answer["country_name"])
+		    print("Location:",answer["location"])
+		    print("Carrier:",answer["carrier"])
+		    print(f"Line type: {answer['line_type']} \n\n")
+		elif answer["valid"] == False:
+		    print("not a valid number")
+	except KeyError:
+		print(answer)		    
+
+
+
+
+# Program main body
 try:
 	target_links = []
 	phone_list = []
