@@ -1,0 +1,6 @@
+requests
+re
+urllib.parse
+argparse
+colorama
+xlsxwriter
