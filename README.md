@@ -1,4 +1,4 @@
-# phunter V2.0.0
+# phunter v2.0.0
 
 Phunter is a tool that gathers phone numbers from all the pages on a target website perform OSINT on the numbers and save it to a csv file with the name of the target domain as the name of the csv file. Phunter can also accepts a single number or a list of numbers. For now phunter works on only Nigerian numbers written in any format.
 
