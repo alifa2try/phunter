@@ -1,9 +1,5 @@
 requests
-re
-urllib.parse
 argparse
 colorama
 xlsxwriter
-sys
 phonenumbers
-json
