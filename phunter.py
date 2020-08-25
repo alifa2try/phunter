@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# This program crawls websites
+# This program crawls websites to gather number and perform OSINT on the numbers using Google. Can also accept single number or list of numbers
 
 try:
 	# import modules
